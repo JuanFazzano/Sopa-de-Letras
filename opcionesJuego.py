@@ -18,7 +18,7 @@ def listadoPalabras (file,cantVB,cantNN,cantJJ):
     RETORNA UN DICCIONARIO CON LA INFORMACION DE LAS PALABRAS
     palbra : [tipo, definicion]
     '''
-    with open(file) as CSV:
+    with open(file,encoding='utf-8') as CSV:
         csvReader = csv.DictReader(CSV)
         vecCont = [0,0,0] # VB, NN, JJ
         dic = {}
@@ -38,7 +38,7 @@ def listadoPalabras (file,cantVB,cantNN,cantJJ):
                     dic[fila['Palabra']] = [fila['Tipo'],fila['Definicion']]
                     vecCont[2] +=1
 
-        return(dic)
+        return dic
 
 def main():
     sg.SetOptions(element_padding=(10,10),background_color='#C0C0C0',element_background_color='#C0C0C0')
@@ -61,7 +61,8 @@ def main():
             ]
 
     tipografias = ['Helvetica', 'Times', 'Arial', 'Georgia', 'Verdana','Tahoma', 'Times New Roman','Trebuchet', 'Courier', 'Comic','Fixedsys']
-    f_tipografia = [[sg.Combo(tipografias,key='__TIPOGRAFIA__',readonly=True)]]
+    f_tipografia = [[sg.T('Titulo'),sg.Combo(tipografias,key='TIPOGRAFIA_TIT',readonly=True)],
+                    [sg.T('Texto'),sg.Combo(tipografias,key='TIPOGRAFIA_TEX',readonly=True)]]
 
     f_grafia = [[sg.Combo(['minusculas','MAYUSCULAS'],key='__CAPITALIZACION__',readonly=True,size=(20,3))]]
     layout= [
@@ -77,12 +78,12 @@ def main():
     window = sg.Window('Menu de Juego').Layout(layout)
 
     event, buttons = window.Read()
+    print(buttons)
 
     if event == 'Salir':
         exit()
 
     elif event == 'Empezar a Jugar':
-
         dic = listadoPalabras(file,buttons['__cantVB__'], buttons['__cantNN__'], buttons['__cantJJ__'])
 
         window.Close()

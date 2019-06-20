@@ -14,6 +14,7 @@ import PySimpleGUI as sg
 import verificarPalabra, opcionesJuego
 import csv
 
+
 def verificacion():
     '''
     CREACION DE LOS ARCHIVOS QUE SE VAN A UTILIZAR PARA EL JUEGO
@@ -70,7 +71,6 @@ def eliminarTodo(file):
         writer = csv.writer(csvFile)
         writer.writerows(headers)
 
-
 # MAIN
 
 sg.SetOptions(element_padding=(10,10),background_color='#C0C0C0',element_background_color='#C0C0C0')
@@ -80,9 +80,9 @@ palabras = tomarPalabras(file)
 
 f_list = [[sg.Listbox(palabras,select_mode=True,size=(30,6),key='listado')]]
 f_lectura = [
-                [sg.Input('',size=(20,3),do_not_clear=False)],
-                [sg.Button('Agregar palabra',key='add'),sg.Button('Eliminar palabra',key='del'),sg.Button('Eliminar todo',key= 'del_all')]
-                ]
+            [sg.Input('',size=(20,3),do_not_clear=False)],
+            [sg.Button('Agregar palabra',key='add'),sg.Button('Eliminar palabra',key='del'),sg.Button('Eliminar todo',key= 'del_all')]
+            ]
 
 layout= [
             [sg.Frame('Palabras Guardadas',f_list)],
@@ -99,6 +99,7 @@ while True:
     elif event == 'Continuar':
         break
     elif validar(pal):
+        #Antes de
         if pal != '':
             if event == 'add':
                 verificarPalabra.main(pal)
@@ -118,7 +119,7 @@ while True:
         else:
             sg.Popup('No se ingreso una palabra')
     else:
-        sg.Popup('Ingrese una palabra sin simbolos')
+        sg.Popup('Ingrese una palabra valida')
 
 window.Close()
 opcionesJuego.main()

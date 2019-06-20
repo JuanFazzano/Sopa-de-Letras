@@ -142,10 +142,29 @@ def ayuda (dicPalabras):
     '''
     DEVUELVE UN TEXTO CON TODAS LAS DEFINICIONES DE LAS PALABRAS AGREGADAS
     '''
-
+    texto = ''
     for i in dicPalabras.values():
         texto += i[1] + '\n'
     return texto
+
+def leerReporte():
+    '''
+    DEVUELVE EL REPORTE DE LAS PALABRAS ERRONEAS COMO LISTA
+    '''
+    with open('reporte.txt',encoding='utf-8') as f:
+        lineas =  f.readlines()
+    return ''.join(lineas)
+
+
+def mostrarReporte(fTit,fTex):
+    '''
+    MOSTRAR EN PANTALLA EL REPORTE DE LAS PALABRAS ERRONEAS
+    '''
+    # lista = verificarPalabra.mostrarReporte()
+    layout_reporte = [[sg.Multiline(leerReporte(),font=fTex,disabled=True)],
+                      [sg.CloseButton('Cerrar')]]
+    window_reporte = sg.Window('Reporte de Palabras Erroneas',font=fTit).Layout(layout_reporte)
+    window_reporte.Read()
 
 def main(dicPalabras,datos):
 
@@ -162,6 +181,9 @@ def main(dicPalabras,datos):
     columnas,filas = setSize(orientacion,cantidadPalabras,palabraMasLarga)
     ancho,alto = filas * px, columnas * px
 
+    # DATOS DEL REPORTE
+    fTIT = datos['TIPOGRAFIA_TIT']
+    fTEX = datos['TIPOGRAFIA_TEX']
 
     # COLORES
     if datos['__cVB__'] == '':
@@ -179,10 +201,11 @@ def main(dicPalabras,datos):
     else:
         cNN = datos['__cNN__']
 
-
     cFondo = 'white'
     cAct = cFondo
     listc = [cFondo,cAct,cVB,cJJ,cNN]
+
+    sg.SetOptions(button_color=('white', 'black'))
 
     # dic[(x,y)] : OBJETO
     dic = dict()
@@ -193,8 +216,10 @@ def main(dicPalabras,datos):
                 [sg.Text('Sopa de letras'), sg.Text('', key='_OUTPUT_')],
                 [sg.Graph((alto,ancho), (0,ancho), (alto,0), background_color = cFondo, key='_GRAPH_', change_submits=True, drag_submits=False)],
                 [sg.Button('Verbo',size=(15,2), button_color=(cFondo, listc[2])),sg.Button('Adjetivo',size=(15,2), button_color=(cFondo, listc[3])), sg.Button('Sustantivo',size=(15,2), button_color=(cFondo, listc[4]))],
-
-                [sg.Submit('Terminar Juego',size=(15, 1), button_color=(cFondo, 'black')), sg.Button('Ayuda',size=(15, 1), button_color=(cFondo, 'black')) ,sg.Cancel('Salir',size=(15, 1), button_color=(cFondo, 'black'))]
+                [sg.Submit('Mostrar Resultados',size=(15, 1)),
+                 sg.Button('Ayuda',size=(15, 1)),
+                 sg.Button('Mostrar Reporte',key='reporte',),
+                 sg.Cancel('Salir',size=(15, 1))]
              ]
     window = sg.Window('Sopa de letras').Layout(layout).Finalize()
     g = window.FindElement('_GRAPH_')
@@ -219,7 +244,8 @@ def main(dicPalabras,datos):
             if event == 'Terminar Juego':
                 terminar(g, dic, px, columnas, filas, listc)
                 fin = True
-
+            elif event == 'reporte':
+                mostrarReporte(fTIT,fTEX)
             # CAMBIO DE COLORES
             elif event == 'Verbo':
                 cAct = cVB

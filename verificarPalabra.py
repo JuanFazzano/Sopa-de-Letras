@@ -7,6 +7,9 @@ import PySimpleGUI as sg
 from bs4 import BeautifulSoup
 
 def creacion(file,*fieldnames):
+    '''
+    CREACION DE LOS ARCHIVOS EN CASO DE QUE NO EXISTAN
+    '''
     l = []
     f = open(file,'w',encoding='utf-8')
     writer = csv.writer(f)
@@ -15,11 +18,15 @@ def creacion(file,*fieldnames):
     f.close()
 
 def verificar_archivos(file,*fieldnames):
+    '''
+    VERIFICACION PARA VER SI EXISTEN LOS ARCHIVOS QUE SE REQUIEREN
+    '''
     import os
     if not os.path.exists(file):
         creacion(file, *fieldnames)
 
 def limpiar(source):
+    '''LIMPIA LA DEFINICION DE LA PALABRA, SACANDOLE LOS DATOS INNECESARIOS.'''
     for i in source('ul'):
         i.decompose()
     for i in source('sup'):
@@ -27,7 +34,8 @@ def limpiar(source):
     return source
 
 def tipoPal(articulo):
-    for i in articulo.sections:         # Itera por cada objeto WiktionarySection y se fija de que tipo es
+    '''BUSCA EL TIPO DE PALABRA DESDE UN OBJETO WiktionaryArticle.'''
+    for i in articulo.sections:
         if "adjetivo" in i.title.lower():
             defi = limpiar(BeautifulSoup(i.source,"html.parser").find("dd"))
             return 'JJ',defi.text.split('\n')[0]
@@ -38,11 +46,10 @@ def tipoPal(articulo):
             defi = limpiar(BeautifulSoup(i.source,"html.parser").find("dd"))
             return 'VB',defi.text.split('\n')[0]
 
-def guardarReporte(lis,error=''):
-    with open('reporte.csv','a',newline='',encoding='utf-8') as f:
-        writer = csv.writer(f)
-        lis.append(error)
-        writer.writerow(lis)
+def guardarReporte(lis):
+    '''REPORTA LAS PALABRAS QUE DIERON ERROR AL MOMENTO DE ANALIZARLAS.'''
+    with open('reporte.txt','a',newline='',encoding='utf-8') as f:
+        f.writelines(lis)
 
 def guardarPalabra(lis):
     with open('palabras.csv','a',newline='',encoding='utf-8') as f:
@@ -50,6 +57,7 @@ def guardarPalabra(lis):
         writer.writerow(lis)
         
 def pedirDefinicion(palabra):
+    '''Se pide al usuario una definicion de la palabra que haya ingresado, en el caso en que no se pueda identificar.'''
     layout_definicion =[
             [sg.T('La palabra ingresada no se ha podido identificar. Por favor ingrese una definicion de la palabra')],
             [sg.Input()],
@@ -73,11 +81,11 @@ def main(palabra):
             tipo, definicion = tipoPal(seccion)
         except TypeError:
             sg.Popup('La palabra ingresada no es Verbo, Sustantivo o Adjetivo.',title='Tipo no identificado')
-            return
+            # return
         defPal.append(tipo)
         defPal.append(definicion)
         if tag(palabra)[0][1] != defPal[1]:  #Si la palabra no coincide con el pattern se guarda en el reporta
-            guardarReporte(defPal,'Pattern no coincide con Wiktionary')
+            guardarReporte(palabra + " :Pattern no coincide con Wiktionary.\n")
         else: # Guarda la palabra en el archivo de palabras
             guardarPalabra(defPal)
     else: #No se encontro en el Wiktionary
@@ -85,12 +93,10 @@ def main(palabra):
             defPal.append(tag(palabra)[0][1])
             defPal.append(pedirDefinicion(palabra))
             guardarPalabra(defPal)
-            guardarReporte(defPal,"La palabra no se encontro en Wiktionary")
+            guardarReporte(palabra + ": La palabra no se encontro en Wiktionary.\n")
         else:
-            defPal.append('-')
-            defPal.append('-')
-            guardarReporte(defPal,"Palabra desconocida por Wiktionary y Pattern")
+            guardarReporte(palabra + ": Palabra desconocida por Wiktionary y Pattern.\n")
 
 if __name__ == '__main__':
     import sys
-    sys.exit(main(palabra))
+    sys.exit(main('batman'))
