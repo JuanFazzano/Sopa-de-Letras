@@ -1,0 +1,18 @@
+Integrantes:
+  -> Fazzano, Juan Manuel
+  -> Baudino Zoya, Fermín
+  -> Comba, Sebastian
+
+
+
+
+Para la ejecución de todo el programa:
+  -> menu.py
+
+Para la ejecución de la sopa de letra unicamente:
+  -> opcionesJuego.py
+
+Funciona en los siguientes sistemas:
+  -> Windows
+  -> Linux
+  -> Mac OS
