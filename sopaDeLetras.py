@@ -101,15 +101,15 @@ def terminar(g, dic, px, columnas, filas, listc):
     '''
 
     total = columnas*filas
-    errores = 0
+    aciertos = 0
     for x in range(columnas):
         for y in range(filas):
             dic[(x,y)].comparar(g,px,listc)
-            if dic[(x,y)].get_OK() != False:
-                errores += 1
+            if dic[(x,y)].get_OK():
+                aciertos += 1
 
-    porcentaje = errores * 100 / total
-    sg.Popup('Lograste un {}% correctamente' .format(int(porcentaje)))
+    porcentaje = aciertos * 100 / total
+    sg.Popup('Lograste un {}% correctamente, te falto pintar bien un {}% de los casilleros' .format(int(porcentaje),int(100 - porcentaje)))
 
 
 
@@ -216,7 +216,7 @@ def main(dicPalabras,datos):
                 [sg.Text('Sopa de letras'), sg.Text('', key='_OUTPUT_')],
                 [sg.Graph((alto,ancho), (0,ancho), (alto,0), background_color = cFondo, key='_GRAPH_', change_submits=True, drag_submits=False)],
                 [sg.Button('Verbo',size=(15,2), button_color=(cFondo, listc[2])),sg.Button('Adjetivo',size=(15,2), button_color=(cFondo, listc[3])), sg.Button('Sustantivo',size=(15,2), button_color=(cFondo, listc[4]))],
-                [sg.Submit('Mostrar Resultados',size=(15, 1)),
+                [sg.Submit('Terminar Juego',size=(15, 1)),
                  sg.Button('Ayuda',size=(15, 1)),
                  sg.Button('Mostrar Reporte',key='reporte',),
                  sg.Cancel('Salir',size=(15, 1))]
@@ -237,15 +237,17 @@ def main(dicPalabras,datos):
     while True:
         event, values = window.Read()
         # TERMINAR JUEGO
-        if event is None or event == 'Salir':
+        if event is None or event == 'Salir' or fin:
             break
 
         if fin != True:
             if event == 'Terminar Juego':
                 terminar(g, dic, px, columnas, filas, listc)
                 fin = True
+
             elif event == 'reporte':
                 mostrarReporte(fTIT,fTEX)
+
             # CAMBIO DE COLORES
             elif event == 'Verbo':
                 cAct = cVB
