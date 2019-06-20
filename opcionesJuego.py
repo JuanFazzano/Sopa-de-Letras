@@ -43,7 +43,7 @@ def listadoPalabras (file,cantVB,cantNN,cantJJ):
 def main():
     sg.SetOptions(element_padding=(10,10),background_color='#C0C0C0',element_background_color='#C0C0C0')
 
-    file = 'palabras.csv'
+    file_palabras = 'archivos/palabras.csv'
 
     f_colores = [
             [sg.ColorChooserButton('Verbos',key='__cVB__',size=(10,3), button_color=None),
@@ -76,19 +76,21 @@ def main():
 
 
     window = sg.Window('Menu de Juego').Layout(layout)
-
     event, buttons = window.Read()
-    print(buttons)
+
 
     if event == 'Salir':
         exit()
-
     elif event == 'Empezar a Jugar':
-        dic = listadoPalabras(file,buttons['__cantVB__'], buttons['__cantNN__'], buttons['__cantJJ__'])
+        if(buttons['__cantVB__'] + buttons['__cantNN__'] + buttons['__cantJJ__']) == 0.0:
+            from random import choice, randint
+            sg.Popup('No ingreso ningun numero de palabras a usar, se seleccionara al azar uno por usted.',title='ADVERTENCIA!')
+            azar = ['__cantVB__', '__cantNN__', '__cantJJ__']
+            buttons[choice(azar)] += randint(1,5)
+        dic = listadoPalabras(file_palabras,buttons['__cantVB__'], buttons['__cantNN__'], buttons['__cantJJ__'])
 
         window.Close()
         sopaDeLetras.main(dic,buttons)
-
 
 
 if __name__ == '__main__':

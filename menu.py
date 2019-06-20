@@ -20,8 +20,8 @@ def verificacion():
     CREACION DE LOS ARCHIVOS QUE SE VAN A UTILIZAR PARA EL JUEGO
     '''
 
-    verificarPalabra.verificar_archivos('palabras.csv','Palabra','Tipo','Definicion')
-    verificarPalabra.verificar_archivos('reporte.csv','Palabra','Tipo','Definicion','Error')
+    verificarPalabra.verificar_archivos(file_palabras,'Palabra','Tipo','Definicion')
+    verificarPalabra.verificar_archivos(file_reporte)
 
 def eliminarPalabra(file,palabra):
     '''
@@ -72,11 +72,16 @@ def eliminarTodo(file):
         writer.writerows(headers)
 
 # MAIN
+lay_imagen = [[sg.Image('archivos/sopa_img.png')],
+              [sg.CloseButton('Jugar')]]
+window = sg.Window('Sopa de Letras').Layout(lay_imagen)
+window.Read()
 
 sg.SetOptions(element_padding=(10,10),background_color='#C0C0C0',element_background_color='#C0C0C0')
 
-file = 'palabras.csv'
-palabras = tomarPalabras(file)
+file_palabras = 'archivos/palabras.csv'
+file_reporte = 'archivos/reporte.txt'
+palabras = tomarPalabras(file_palabras)
 
 f_list = [[sg.Listbox(palabras,select_mode=True,size=(30,6),key='listado')]]
 f_lectura = [
@@ -105,16 +110,16 @@ while True:
                 verificarPalabra.main(pal)
             elif event == 'del':
                 if pal in palabras:
-                    eliminarPalabra(file,pal)
+                    eliminarPalabra(file_palabras,pal)
                 else:
                     sg.Popup('La palabra ingresada no existe en la lista de palabras')
             elif event == 'del_all':
                 event = sg.PopupOKCancel('Esta seguro de que quiere elimar todas las palabras',title='Advertencia',background_color='#C0C0C0')
                 if event == 'OK':
-                    eliminarTodo(file)
+                    eliminarTodo(file_palabras)
                     window.FindElement('listado').Update(values=[])
             # ACTUALIZAR LISTADO DE PALABRAS
-            palabras = tomarPalabras(file)
+            palabras = tomarPalabras(file_palabras)
             window.FindElement('listado').Update(values=palabras)
         else:
             sg.Popup('No se ingreso una palabra')

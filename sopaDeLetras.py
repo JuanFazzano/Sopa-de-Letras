@@ -151,7 +151,7 @@ def leerReporte():
     '''
     DEVUELVE EL REPORTE DE LAS PALABRAS ERRONEAS COMO LISTA
     '''
-    with open('reporte.txt',encoding='utf-8') as f:
+    with open('archivos/reporte.txt',encoding='utf-8') as f:
         lineas =  f.readlines()
     return ''.join(lineas)
 

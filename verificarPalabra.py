@@ -6,9 +6,9 @@ import csv
 import PySimpleGUI as sg
 from bs4 import BeautifulSoup
 
-def creacion(file,*fieldnames):
+def creacionPal(file,*fieldnames):
     '''
-    CREACION DE LOS ARCHIVOS EN CASO DE QUE NO EXISTAN
+    CREACION DEL ARCHIVOS DE PALABRAS
     '''
     l = []
     f = open(file,'w',encoding='utf-8')
@@ -17,14 +17,19 @@ def creacion(file,*fieldnames):
 
     f.close()
 
+def cracionRep(file):
+    f = open(file,'w',encoding='utf-8')
+    f.close
 def verificar_archivos(file,*fieldnames):
     '''
     VERIFICACION PARA VER SI EXISTEN LOS ARCHIVOS QUE SE REQUIEREN
     '''
     import os
     if not os.path.exists(file):
-        creacion(file, *fieldnames)
-
+        if file.endswith('.csv'):
+            creacionPal(file, *fieldnames)
+        else:
+            cracionRep(file)
 def limpiar(source):
     '''LIMPIA LA DEFINICION DE LA PALABRA, SACANDOLE LOS DATOS INNECESARIOS.'''
     for i in source('ul'):
@@ -48,11 +53,11 @@ def tipoPal(articulo):
 
 def guardarReporte(lis):
     '''REPORTA LAS PALABRAS QUE DIERON ERROR AL MOMENTO DE ANALIZARLAS.'''
-    with open('reporte.txt','a',newline='',encoding='utf-8') as f:
+    with open('archivos/reporte.txt','a',newline='',encoding='utf-8') as f:
         f.writelines(lis)
 
 def guardarPalabra(lis):
-    with open('palabras.csv','a',newline='',encoding='utf-8') as f:
+    with open('archivos/palabras.csv','a',newline='',encoding='utf-8') as f:
         writer = csv.writer(f)
         writer.writerow(lis)
         
