@@ -112,7 +112,7 @@ while True:
         if pal != '':
             if event == 'add':
                 verificarPalabra.main(pal)
-            elif event == 'del':
+            else event == 'del':
                 if pal in palabras:
                     eliminarPalabra(file_palabras,pal)
                 else:
