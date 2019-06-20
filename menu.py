@@ -104,7 +104,8 @@ while True:
     elif event == 'Continuar':
         break
     elif event == 'del_all':
-        event = sg.PopupOKCancel('Esta seguro de que quiere elimar todas las palabras',title='Advertencia',background_color='#C0C0C0')
+        event = sg.PopupOKCancel('Esta seguro de que quiere elimar todas las palabras', title='Advertencia',
+                                 background_color='#C0C0C0')
         if event == 'OK':
             eliminarTodo(file_palabras)
             window.FindElement('listado').Update(values=[])
@@ -112,12 +113,11 @@ while True:
         if pal != '':
             if event == 'add':
                 verificarPalabra.main(pal)
-            else event == 'del':
+            elif event == 'del':
                 if pal in palabras:
                     eliminarPalabra(file_palabras,pal)
                 else:
                     sg.Popup('La palabra ingresada no existe en la lista de palabras')
-           
             # ACTUALIZAR LISTADO DE PALABRAS
             palabras = tomarPalabras(file_palabras)
             window.FindElement('listado').Update(values=palabras)
