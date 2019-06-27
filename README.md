@@ -3,7 +3,7 @@ Sopa de Letras realizada en Python
 
 Integrantes:
   -> Fazzano, Juan Manuel
-  -> Baudino Soya, Fermin
+  -> Baudino Zoya, Fermin
   -> Comba, Sebastian
   
 Para la ejecución de todo el programa:
