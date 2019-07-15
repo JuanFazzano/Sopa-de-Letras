@@ -6,13 +6,10 @@ Integrantes:
   -> Baudino Zoya, Fermin
   -> Comba, Sebastian
   
-Para la ejecución de todo el programa:
+Para la ejecución del programa:
   -> menu.py
-
-Para la ejecución de la sopa de letra unicamente:
-  -> opcionesJuego.py
 
 Funciona en los siguientes sistemas:
   -> Windows
   -> Linux
-  -> Mac OS
+  -> Mac OS (los colores de los botones no funcionan en este SO)
