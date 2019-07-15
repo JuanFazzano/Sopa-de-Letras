@@ -1,15 +1,16 @@
 # Seminario-de-Lenguajes---Python-2019---Sopa-de-Letras
 Sopa de Letras realizada en Python
 
-Integrantes:
+\chapter{Integrantes:}
   -> Fazzano, Juan Manuel
   -> Baudino Zoya, Fermin
   -> Comba, Sebastian
   
-Para la ejecución del programa:
-  -> menu.py
+\begin{Hola}
+\chapter{Para la ejecución del programa:}
+  -> $ python3 menu.py
 
-Funciona en los siguientes sistemas:
+\chapter{Funciona en los siguientes sistemas:}
   -> Windows
   -> Linux
   -> Mac OS (los colores de los botones no funcionan en este SO)
