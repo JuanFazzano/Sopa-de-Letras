@@ -109,8 +109,11 @@ def terminar(g, dic, px, columnas, filas, listc):
                 aciertos += 1
 
     porcentaje = aciertos * 100 / total
-    sg.Popup('Lograste un {}% correctamente, te falto pintar bien un {}% de los casilleros' .format(int(porcentaje),int(100 - porcentaje)))
 
+    if porcentaje == 100:
+        sg.Popup('Ganaste :)! Encontraste todas las palabras!.', title='Ganador')
+    else:
+        sg.Popup('Perdiste :( Te faltaron encontrar palabras, o marcaste alguna que no era.', title='Perdedor')
 
 
 def setSize(orientacion,cantidadPalabras,palabraMasLarga):

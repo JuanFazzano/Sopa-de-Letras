@@ -11,7 +11,6 @@ Manejo de las opciones a tener en la sopa de letras
 import PySimpleGUI as sg
 import csv
 import sopaDeLetras
-# from menu import listadoPalabras
 
 def listadoPalabras (file,cantVB,cantNN,cantJJ):
     '''
@@ -40,7 +39,7 @@ def listadoPalabras (file,cantVB,cantNN,cantJJ):
 
         return dic
 
-def main():
+def main(cantVB,cantNN,cantJJ):
     sg.SetOptions(element_padding=(10,10),background_color='#C0C0C0',element_background_color='#C0C0C0')
 
     file_palabras = 'archivos/palabras.csv'
@@ -53,24 +52,16 @@ def main():
 
     f_orientacion = [[sg.Combo(['horizontal','vertical'],key='__ORIENTACION__',readonly=True)]]
 
-    f_palabras = [
-            [sg.T('Verbos'), sg.T('Adjetivos',pad=(100,10)), sg.T('Sustantivos',pad=(20,10))],
-            [sg.Slider(range=(0, 5),orientation='h',size=(15, 20),key='__cantVB__'),
-             sg.Slider(range=(0, 5),orientation='h',size=(15, 20),key='__cantJJ__'),
-             sg.Slider(range=(0, 5),orientation='h',size=(15, 20),key='__cantNN__')]
-            ]
-
     tipografias = ['Helvetica', 'Times', 'Arial', 'Georgia', 'Verdana','Tahoma', 'Times New Roman','Trebuchet', 'Courier', 'Comic','Fixedsys']
     f_tipografia = [[sg.T('Titulo'),sg.Combo(tipografias,key='TIPOGRAFIA_TIT',readonly=True)],
                     [sg.T('Texto'),sg.Combo(tipografias,key='TIPOGRAFIA_TEX',readonly=True)]]
 
     f_grafia = [[sg.Combo(['minusculas','MAYUSCULAS'],key='__CAPITALIZACION__',readonly=True,size=(20,3))]]
     layout= [
-                [sg.Frame('Seleccionar color para los tipos de palabra',f_colores),#,font='Arial'),
-                    sg.Frame('Elegir orientacion para jugar',f_orientacion)],#,font='Arial')],
-                [sg.Frame('Seleccione la tipografia a usar en el reporte',f_tipografia),#,font='Arial'),
-                    sg.Frame('Seleccion de Grafía a usar',f_grafia,size=(100,3))],#,font='Arial')],
-                [sg.Frame('Cantidad de palabras a Mostrar',f_palabras)],#, font='Arial')],
+                [sg.Frame('Seleccionar color para los tipos de palabra',f_colores),
+                    sg.Frame('Elegir orientacion para jugar',f_orientacion)],
+                [sg.Frame('Seleccione la tipografia a usar en el reporte',f_tipografia),
+                    sg.Frame('Seleccion de Grafía a usar',f_grafia,size=(100,3))],
                 [sg.Submit('Empezar a Jugar'), sg.Exit('Salir')]
             ]
 
@@ -82,12 +73,7 @@ def main():
     if event == 'Salir':
         exit()
     elif event == 'Empezar a Jugar':
-        if(buttons['__cantVB__'] + buttons['__cantNN__'] + buttons['__cantJJ__']) == 0.0:
-            from random import choice, randint
-            sg.Popup('No ingreso ningun numero de palabras a usar, se seleccionara al azar uno por usted.',title='ADVERTENCIA!')
-            azar = ['__cantVB__', '__cantNN__', '__cantJJ__']
-            buttons[choice(azar)] += randint(1,5)
-        dic = listadoPalabras(file_palabras,buttons['__cantVB__'], buttons['__cantNN__'], buttons['__cantJJ__'])
+        dic = listadoPalabras(file_palabras,cantVB, cantNN, cantJJ)
 
         window.Close()
         sopaDeLetras.main(dic,buttons)

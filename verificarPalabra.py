@@ -65,12 +65,12 @@ def pedirDefinicion(palabra):
     '''Se pide al usuario una definicion de la palabra que haya ingresado, en el caso en que no se pueda identificar.'''
     layout_definicion =[
             [sg.T('La palabra ingresada no se ha podido identificar. Por favor ingrese una definicion de la palabra')],
-            [sg.Input()],
-            [sg.Ok()]
+            [sg.Input('',key='def')],
+            [sg.CloseButton('Ok')]
                         ]
     window_def = sg.Window('Palabra No Identificada').Layout(layout_definicion)
     event, definicion = window_def.Read()
-    return definicion[0]
+    return definicion['def']
 
 def main(palabra):
     defPal = [palabra]
@@ -91,6 +91,7 @@ def main(palabra):
         defPal.append(definicion)
         if tag(palabra)[0][1] != defPal[1]:  #Si la palabra no coincide con el pattern se guarda en el reporta
             guardarReporte(palabra + " :Pattern no coincide con Wiktionary.\n")
+            sg.Popup('La palabra no pudo ser identificada correctamente.', title='Error en Wiktionary y Pattern')
         else: # Guarda la palabra en el archivo de palabras
             guardarPalabra(defPal)
     else: #No se encontro en el Wiktionary
@@ -100,6 +101,7 @@ def main(palabra):
             guardarPalabra(defPal)
             guardarReporte(palabra + ": La palabra no se encontro en Wiktionary.\n")
         else:
+            sg.Popup('La palabra no se pudo reconocer, esta bien escrita?',title='Palabra no reconocida')
             guardarReporte(palabra + ": Palabra desconocida por Wiktionary y Pattern.\n")
 
 if __name__ == '__main__':
