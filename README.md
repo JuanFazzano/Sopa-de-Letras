@@ -2,15 +2,15 @@
 Sopa de Letras realizada en Python
 
 ## Integrantes:
-    Fazzano, Juan Manuel
-    Baudino Zoya, Fermin
-    Comba, Sebastian
+   Fazzano, Juan Manuel
+   Baudino Zoya, Fermin
+   Comba, Sebastian
 
 ## Para la ejecución del programa:
 ```bash
   $ python3 menu.py
  ```
 ## Funciona en los siguientes sistemas:
-    Windows
-    Linux
-    Mac OS (los colores de los botones no funcionan en este SO)
+   Windows
+   Linux
+   Mac OS (los colores de los botones no funcionan en este SO)
