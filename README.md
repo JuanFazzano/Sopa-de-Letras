@@ -2,10 +2,12 @@
 Sopa de Letras realizada en Python
 
 ## Integrantes:
-  -> Fazzano, Juan Manue
+  -> Fazzano, Juan Manuel
+  -
   -> Baudino Zoya, Fermin
+  -
   -> Comba, Sebastian
-  
+  -
 
 ## Para la ejecución del programa:
 ```bash
@@ -13,5 +15,8 @@ Sopa de Letras realizada en Python
  ```
 ## Funciona en los siguientes sistemas:
   -> Windows
+  -
   -> Linux
+  -
   -> Mac OS (los colores de los botones no funcionan en este SO)
+  -
