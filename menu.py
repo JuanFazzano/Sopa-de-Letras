@@ -11,10 +11,14 @@ Menu del manejo de palabras, se podrán agregar y eliminar palabras, y acceder a
 
 # -*- coding: utf-8 -*-
 import PySimpleGUI as sg
-import verificarPalabra, opcionesJuego
+from Juego import opcionesJuego, verificarPalabra
 import csv
 
+
 def verificar_cantidad(button,file):
+    '''
+    VERIFICAR QUE EL USUARIO HAYA INGRESADO CORRECTAMENTE LA CANTIDAD DE PALABRAS A USAR EN LA SOPA
+    '''
     vb,jj,nn = 0,0,0
     with open(file, 'r', encoding='utf-8') as CSVfile:
         reader = csv.reader(CSVfile)
@@ -35,7 +39,7 @@ def verificar_cantidad(button,file):
 
         elegir_azar(maximo,tipo,button)
 def elegir_azar(maximo,tipo,button):
-    from random import choice, randint
+    from random import randint
     sg.Popup('Eligió una cantidad inválida de palabras, se configurará automaticamente una cantidad válida por usted.')
     if maximo > 6: maximo =6
     button[tipo] += randint(1, maximo+1)
@@ -45,7 +49,7 @@ def verificacion():
     CREACION DE LOS ARCHIVOS QUE SE VAN A UTILIZAR PARA EL JUEGO
     '''
 
-    verificarPalabra.verificar_archivos(file_palabras,'Palabra','Tipo','Definicion')
+    verificarPalabra.verificar_archivos(file_palabras, 'Palabra', 'Tipo', 'Definicion')
     verificarPalabra.verificar_archivos(file_reporte)
 
 def eliminarPalabra(file,palabra):
@@ -96,7 +100,37 @@ def eliminarTodo(file):
         writer = csv.writer(csvFile)
         writer.writerows(headers)
 
+
+def elegir_oficina():
+    '''
+    DEVUELVE UN STRING CON EL "LookAndFeel"  QUE SE VA A USAR
+    '''
+    from Raspberry.registro_ambiental import cargar
+    lookAndFeel = 'SystemDefault'
+    dic = cargar()
+    if len(list(dic.values())) > 0:
+        layout = [
+                [sg.T('Seleccione una de las oficinas de la lista.')],
+                [sg.InputCombo(list(dic.keys()), size=(20, 10), key='ofi')],
+                [sg.CloseButton('Seleccionar')]
+                 ]
+        window = sg.Window('Elegir Oficina').Layout(layout)
+        event, buttons = window.Read()
+        if event == 'Seleccionar':
+            oficina = buttons['ofi']
+            tempe = dic[oficina][-1]
+            temperatura = tempe['Temperatura']
+            if temperatura <= 10:
+                lookAndFeel = 'TealMono'
+            elif temperatura > 10 and temperatura <= 30:
+                lookAndFeel = 'DarkBlue'
+            else:
+                lookAndFeel = 'Reddit'
+
+    return lookAndFeel
+
 # MAIN
+sg.ChangeLookAndFeel(elegir_oficina())
 lay_imagen = [[sg.Image('archivos/sopa_img.png')],
               [sg.CloseButton('Jugar')]]
 window = sg.Window('Sopa de Letras').Layout(lay_imagen)
@@ -136,8 +170,6 @@ while True:
         exit()
     elif event == 'Continuar':
         if not len(palabras) < 1:
-            # if button['__cantVB__'] + button['__cantNN__'] + button['__cantJJ__'] == 0:
-            #     elegir_azar(len(palabras),button)
             verificar_cantidad(button,file_palabras)
             break
         sg.Popup('No hay palabras cargadas en el archivo, por favor ingrese al menos una',title='ADVERTENCIA',)
@@ -166,4 +198,4 @@ while True:
         sg.Popup('Ingrese una palabra valida')
 
 window.Close()
-opcionesJuego.main(button['__cantVB__'],button['__cantNN__'],button['__cantJJ__'])
+opcionesJuego.main(button['__cantVB__'], button['__cantNN__'], button['__cantJJ__'])

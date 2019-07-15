@@ -2,3 +2,17 @@ colorado: Pattern no coincide con Wiktionary.
 batman: Palabra desconocida por Wiktionary y Pattern.
 rapido: Palabra desconocida por Wiktionary y Pattern.
 batman: Palabra desconocida por Wiktionary y Pattern.
+hola :Pattern no coincide con Wiktionary.
+hola :Pattern no coincide con Wiktionary.
+sd: Palabra desconocida por Wiktionary y Pattern.
+Seguridad: La palabra no se encontro en Wiktionary.
+Seguridad: La palabra no se encontro en Wiktionary.
+Seguridad: La palabra no se encontro en Wiktionary.
+reportatres: Palabra desconocida por Wiktionary y Pattern.
+skere: Palabra desconocida por Wiktionary y Pattern.
+batman: Palabra desconocida por Wiktionary y Pattern.
+seguri: Palabra desconocida por Wiktionary y Pattern.
+security :Pattern no coincide con Wiktionary.
+security :Pattern no coincide con Wiktionary.
+Seguridad: La palabra no se encontro en Wiktionary.
+boton: Palabra desconocida por Wiktionary y Pattern.

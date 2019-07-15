@@ -1,0 +1,83 @@
+{
+    "Temperatura Alta": [
+        {
+            "Humedad": 8,
+            "Temperatura": 6,
+            "fecha": "Mon Jul 15 15:54:46 2019"
+        },
+        {
+            "Humedad": 8,
+            "Temperatura": 6,
+            "fecha": "Mon Jul 15 15:55:05 2019"
+        },
+        {
+            "Humedad": 8,
+            "Temperatura": 6,
+            "fecha": "Mon Jul 15 15:55:12 2019"
+        },
+        {
+            "Humedad": 8,
+            "Temperatura": 6,
+            "fecha": "Mon Jul 15 15:55:28 2019"
+        },
+        {
+            "Humedad": 40,
+            "Temperatura": 40,
+            "fecha": "Mon Jul 15 15:55:34 2019"
+        }
+    ],
+    "Temperatura Baja": [
+        {
+            "Humedad": 8,
+            "Temperatura": 6,
+            "fecha": "Mon Jul 15 15:47:24 2019"
+        },
+        {
+            "Humedad": 8,
+            "Temperatura": 6,
+            "fecha": "Mon Jul 15 15:47:34 2019"
+        },
+        {
+            "Humedad": 8,
+            "Temperatura": 6,
+            "fecha": "Mon Jul 15 15:47:40 2019"
+        },
+        {
+            "Humedad": 8,
+            "Temperatura": 6,
+            "fecha": "Mon Jul 15 15:47:46 2019"
+        },
+        {
+            "Humedad": 8,
+            "Temperatura": 6,
+            "fecha": "Mon Jul 15 15:47:52 2019"
+        }
+    ],
+    "Temperatura Media": [
+        {
+            "Humedad": 8,
+            "Temperatura": 6,
+            "fecha": "Mon Jul 15 15:48:06 2019"
+        },
+        {
+            "Humedad": 8,
+            "Temperatura": 6,
+            "fecha": "Mon Jul 15 15:48:13 2019"
+        },
+        {
+            "Humedad": 8,
+            "Temperatura": 6,
+            "fecha": "Mon Jul 15 15:48:19 2019"
+        },
+        {
+            "Humedad": 8,
+            "Temperatura": 6,
+            "fecha": "Mon Jul 15 15:50:42 2019"
+        },
+        {
+            "Humedad": 15,
+            "Temperatura": 15,
+            "fecha": "Mon Jul 15 15:50:49 2019"
+        }
+    ]
+}
