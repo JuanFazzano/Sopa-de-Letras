@@ -6,7 +6,27 @@ Comba, Sebastian
 
 Menu del manejo de palabras, se podrán agregar y eliminar palabras, y acceder a las opciones del juego
 '''
-
+# The MIT License
+# #
+# # Copyright (c) 2010-2019 Google, Inc. http://angularjs.org
+# #
+# # Permission is hereby granted, free of charge, to any person obtaining a copy
+# # of this software and associated documentation files (the "Software"), to deal
+# # in the Software without restriction, including without limitation the rights
+# # to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# # copies of the Software, and to permit persons to whom the Software is
+# # furnished to do so, subject to the following conditions:
+# #
+# # The above copyright notice and this permission notice shall be included in
+# # all copies or substantial portions of the Software.
+# #
+# # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# # IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# # FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# # AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# # THE SOFTWARE.
 
 
 # -*- coding: utf-8 -*-
@@ -39,6 +59,10 @@ def verificar_cantidad(button,file):
 
         elegir_azar(maximo,tipo,button)
 def elegir_azar(maximo,tipo,button):
+    '''
+    ELEGIR UNA CANTIDAD DE PALABRAS AL AZAR ENTRE UN MAXIMO CUANDO EL JUGADOR NO INGRESA UNA CANTIDAD VALIDA DE PALABRAS
+    CON LAS QUE VA A JUGAR.
+    '''
     from random import randint
     sg.Popup('Eligió una cantidad inválida de palabras, se configurará automaticamente una cantidad válida por usted.')
     if maximo > 6: maximo =6
@@ -105,7 +129,7 @@ def elegir_oficina():
     '''
     DEVUELVE UN STRING CON EL "LookAndFeel"  QUE SE VA A USAR
     '''
-    from Raspberry.registro_ambiental import cargar
+    from registro_ambiental import cargar
     lookAndFeel = 'SystemDefault'
     dic = cargar()
     if len(list(dic.values())) > 0:
