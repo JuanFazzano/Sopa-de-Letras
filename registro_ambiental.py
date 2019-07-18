@@ -1,6 +1,6 @@
 import time
 import PySimpleGUI as sg
-#from Raspberry.temp import Temperatura
+from Raspberry.temp import Temperatura
 import os.path
 import json
 
@@ -46,7 +46,7 @@ def tomar_temperatura(oficina):
 	'''
 	TOMAR LA TEMPERATURA DE LA OFICINA EN LA QUE ESTA LA RASPBERRY.
 	'''
-	#temp = Temperatura()
+	temp = Temperatura()
 	dic = cargar()
 	if oficina not in dic.keys():
 		dic[oficina] = list()
