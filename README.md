@@ -1,6 +1,10 @@
-# Seminario-de-Lenguajes---Python-2019---Sopa-de-Letras
+# Sopa-de-Letras
 Sopa de Letras realizada en Python
 
+## Objetivos:
+   Se realizo como proyecto final de la materia Seminario de Lenguaje (Python) una sopa de letras, un trabajo social para niños de nivel inicial en primarias.
+   
+   
 ## Integrantes:
    - Fazzano, Juan Manuel
    - Baudino Zoya, Fermin
